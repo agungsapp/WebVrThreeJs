@@ -23,13 +23,13 @@ const VRScene = () => {
       // Inisialisasi scene dan kamera
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-      camera.layers.enable(1);
+      camera.position.set(0, 1.6, 0);
 
-      // Pembuatan skybox dengan gambar cube map stereo
-      const geometry = new THREE.BoxGeometry(500, 500, 500);
-      geometry.scale(1, 1, -1);
+      // Pembuatan skybox dengan gambar panorama 360 derajat
+      const geometry = new THREE.SphereGeometry(500, 60, 40);
+      geometry.scale(-1, 1, 1); // Invers untuk memasang gambar di bagian dalam
 
-      // Memuat tekstur dari file gambar
+      // Memuat tekstur dari file gambar dan menerapkannya pada sphere
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/texture.png', (texture) => {
         const material = new THREE.MeshBasicMaterial({ map: texture });
